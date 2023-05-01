@@ -37,7 +37,4 @@ public abstract class Produto {
 		this.nome = nome;
 	}
 	
-	
-
-	public abstract void imprimirDescricao();
 }

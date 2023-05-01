@@ -12,10 +12,4 @@ public class MaterialConstrucao extends Produto {
 		return cor;
 	}
 
-
-	public void imprimirDescricao() {
-		System.out.println("Material de construção: " + nome + " (" + getCodigoProduto() + "), " + getQuantidade()
-				+ " unidades, R$" + getValor() + " cada.");
-		System.out.println("Cor: " + cor);
-	}
 }
