@@ -3,9 +3,9 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministradorFiliais {
+public class Dados{
 	private List<Filial> banco;
-	AdministradorFiliais(){
+	Dados(){
 		this.banco = new ArrayList<>();
 	}
 	public void adicionarFilial(Filial filial) {
@@ -19,8 +19,7 @@ public class AdministradorFiliais {
 		}
 	}
 	public void buscarFilial(String nome) {
-		for(Filial m : banco) {
-			
+		for(Filial m : banco) {			
 			if(m.getNome()== nome) {
 				m.listarProdutos();
 			}else {

@@ -6,4 +6,5 @@
  *
  */
 module Fabiana {
+	requires java.desktop;
 }
