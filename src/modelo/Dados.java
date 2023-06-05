@@ -12,7 +12,7 @@ public class Dados{
 		
 		banco.add(filial);
 	}
-	public void listarTudo() {
+	public void listarTudo() { 
 		for(Filial m : banco) {
 			System.out.println(m.getNome()+ ": ");
 			m.listarProdutos();

@@ -13,9 +13,7 @@ public class Filial {
     public Filial(String nome) {
         this.nome = nome;    
         this.estoque1 = new ArrayList<>();
-        this.estoque2 = new ArrayList<>();
-        
-        
+        this.estoque2 = new ArrayList<>();     
     }
 
     public String getNome() {

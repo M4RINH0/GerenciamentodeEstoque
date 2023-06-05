@@ -1,11 +1,12 @@
 package modelo;
-import view.TelaInicial;
+import view.*;
 
 public class Main {
     public static void main(String[] args) {
 
-
-    	TelaInicial iniciar = new TelaInicial();
+    	new TelaInicial();
+    	 /*ControladorTela controller = new ControladorTela();
+         controller.exibir();*/
        /* Ferramentas ferramenta = new Ferramentas("F001", 50.0, 5, "Marca A", "Chave de fenda", 1);
         Ferramentas ferramenta2 = new Ferramentas("F002", 50.0, 5, "Marca B", "Chave de CU", 1);
         MaterialConstrucao material = new MaterialConstrucao("M001", 100.0, 10, "Branco", "cimento", "acetato de polivinila");
