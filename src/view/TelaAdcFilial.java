@@ -1,5 +1,5 @@
 package view;
-
+import modelo.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -21,7 +21,7 @@ public class TelaAdcFilial {
 	private static JTextPane area =new JTextPane();
 	private static JButton filial = new JButton("Adicionar Filial");
 	
-	public TelaAdcFilial() {
+	public TelaAdcFilial(Dados banco) {
 	
 		//Pegar Imagem de BackGround
 		BufferedImage img = null;
@@ -59,7 +59,7 @@ public class TelaAdcFilial {
 		
 		filial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new TelaInicial();
+            	new TelaInicial(banco);
                 adcFilial.dispose();
             }
         });

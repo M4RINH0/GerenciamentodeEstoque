@@ -4,8 +4,8 @@ public class MaterialConstrucao extends Produto {
 	private String cor;
 	private String materiaPrima;
 
-	public MaterialConstrucao(String codigoProduto, double valor, int quantidade, String cor, String nome, String materiaPrima) {
-		super(codigoProduto, valor, quantidade, nome);
+	public MaterialConstrucao(String codigoProduto, double valor, String cor, String nome, String materiaPrima) {
+		super(codigoProduto, valor, nome);
 		this.cor = cor;
 		this.materiaPrima = materiaPrima;
 	}
@@ -18,8 +18,8 @@ public class MaterialConstrucao extends Produto {
 		return cor;
 	}
 	public String toString() {
-		return "Nome: "+ nome +  " quantidade: "+ quantidade +  " valor: " + valor +  " codigo Produto: "+ codigoProduto +
-				" Materia prima: " + materiaPrima + " cor: " + cor; 
+		return "Nome: "+ nome + ", Valor: " + valor + ", Código do Produto: "+ codigoProduto +
+				", Materia prima: " + materiaPrima + ", Cor: " + cor; 
 	}
 
 }

@@ -1,5 +1,5 @@
 package view;
-
+import modelo.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -11,13 +11,13 @@ import java.awt.event.ActionListener;
 public class TelaInicial {
 
 	private JLabel label = new JLabel("Gerenciador de Estoque");
-	private JFrame inicio = new JFrame("Inicio");
+	private JFrame janela = new JFrame("Inicio");
 	private JButton filial = new JButton("Adicionar Filial");
 	private JButton produto = new JButton("Adicionar Produto");
 	private JButton listarProdutos = new JButton("Listar Produtos");
 	private JButton buscarProdutos = new JButton("Buscar Produtos");
 	
-	public TelaInicial(){
+	public TelaInicial(Dados banco){
 
 		
 		//Pegar Imagem de BackGround
@@ -35,21 +35,37 @@ public class TelaInicial {
 		label.setVerticalTextPosition(JLabel.TOP);
 		
 		//Frame da Tela	
-		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		inicio.setSize(1280,720);
-		inicio.setLayout(null);
-		Image dimg = img.getScaledInstance(inicio.getWidth(),620,
+		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		janela.setSize(1280,720);
+		janela.setLayout(null);
+		janela.setLocationRelativeTo(null);
+		janela.setResizable(false);
+		Image dimg = img.getScaledInstance(janela.getWidth(),620,
 				Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(dimg);
 		label.setBounds(0, 0, 1280, 720);
 		label.setIcon(imageIcon);
-		inicio.setVisible(true);
+		janela.setVisible(true);
 		
 		//Funções botões
 		filial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new TelaAdcFilial();
-                inicio.dispose();
+                new TelaAdcFilial(banco);
+                janela.dispose();
+            }
+        });
+		
+		buscarProdutos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new BuscarProduto(banco);
+                janela.dispose();
+            }
+        });
+		
+		listarProdutos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new ListarProdutos(banco.getFilial().get(0), banco);
+                janela.dispose();
             }
         });
 		
@@ -61,11 +77,11 @@ public class TelaInicial {
 		
 		
 		//adds
-		inicio.add(filial);
-		inicio.add(produto);
-		inicio.add(listarProdutos);
-		inicio.add(buscarProdutos);
-		inicio.add(label);
+		janela.add(filial);
+		janela.add(produto);
+		janela.add(listarProdutos);
+		janela.add(buscarProdutos);
+		janela.add(label);
 	}
 	
 	

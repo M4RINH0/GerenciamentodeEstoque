@@ -1,17 +1,14 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Dados{
-	private List<Filial> banco;
-	Dados(){
-		this.banco = new ArrayList<>();
-	}
+	public ArrayList<Filial> banco = new ArrayList<Filial>();
+	
 	public void adicionarFilial(Filial filial) {
 		
 		banco.add(filial);
-	}
+	}/*
 	public void listarTudo() { 
 		for(Filial m : banco) {
 			System.out.println(m.getNome()+ ": ");
@@ -31,6 +28,11 @@ public class Dados{
 		for(Filial m : banco) {
 			m.buscarProduto(cp);
 		}
+	}*/
+
+	
+	public ArrayList<Filial> getFilial() {
+		return banco;
 	}
 
 }

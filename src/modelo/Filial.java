@@ -20,10 +20,10 @@ public class Filial {
         return nome;
     }
 
-    public List<MaterialConstrucao> getProdutos1() {
+    public List<MaterialConstrucao> getMateriais() {
         return estoque1;
     }
-    public List<Ferramentas> getProdutos2() {
+    public List<Ferramentas> getFerramentas() {
         return estoque2;
     }
     
@@ -36,14 +36,14 @@ public class Filial {
     	estoque2.add(ferramenta);
     }
     
-    public void removerFerramenta(Ferramentas ferramenta) {
+   /* public void removerFerramenta(Ferramentas ferramenta) {
     	int x = ferramenta.getQuantidade();
     	ferramenta.setQuantidade(x- 1);	
     }
     public void removerMat(MaterialConstrucao mat) {
     	int x = mat.getQuantidade();
     	mat.setQuantidade(x- 1);	
-    }
+    }*/
     
     
     
