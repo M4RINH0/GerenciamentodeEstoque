@@ -12,9 +12,8 @@ public class TelaInicial {
 
 	private JLabel label = new JLabel("Gerenciador de Estoque");
 	private JFrame janela = new JFrame("Inicio");
-	private JButton filial = new JButton("Adicionar Filial");
-	private JButton produto = new JButton("Adicionar Produto");
-	private JButton listarProdutos = new JButton("Listar Produtos");
+	private JButton gerenciaF = new JButton("Gerenciar Filiais");
+	private JButton listarProdutos = new JButton("Gerenciar Produtos");
 	private JButton buscarProdutos = new JButton("Buscar Produtos");
 	
 	public TelaInicial(Dados banco){
@@ -48,16 +47,15 @@ public class TelaInicial {
 		janela.setVisible(true);
 		
 		//Funções botões
-		filial.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new TelaAdcFilial(banco);
-                janela.dispose();
-            }
-        });
-		
 		buscarProdutos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new BuscarProduto(banco);
+                janela.dispose();
+            }
+        });
+		gerenciaF.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new GerenciadorFilial(banco);
                 janela.dispose();
             }
         });
@@ -69,16 +67,15 @@ public class TelaInicial {
             }
         });
 		
+		
 		//Botões Tela
-		filial.setBounds(540,200,180,60);
-		produto.setBounds(540,300,180,60);
+		gerenciaF.setBounds(540,300,180,60);
 		listarProdutos.setBounds(540,400,180,60);
 		buscarProdutos.setBounds(540,500,180,60);
 		
 		
 		//adds
-		janela.add(filial);
-		janela.add(produto);
+		janela.add(gerenciaF);
 		janela.add(listarProdutos);
 		janela.add(buscarProdutos);
 		janela.add(label);

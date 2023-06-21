@@ -8,7 +8,6 @@ public class Filial {
     private List<MaterialConstrucao> estoque1;
     private List<Ferramentas> estoque2;
     
-    
 
     public Filial(String nome) {
         this.nome = nome;    
@@ -36,18 +35,27 @@ public class Filial {
     	estoque2.add(ferramenta);
     }
     
-   /* public void removerFerramenta(Ferramentas ferramenta) {
-    	int x = ferramenta.getQuantidade();
-    	ferramenta.setQuantidade(x- 1);	
+   public int removerFerramenta(String nome) {
+	   int indice = -1;
+       for (int i = 0; i < estoque2.size(); i++) {
+           Ferramentas objeto = estoque2.get(i);
+           if (objeto.getNome().equals(nome)) {
+               indice = i;       
+           }
+       }
+       return indice;
     }
-    public void removerMat(MaterialConstrucao mat) {
-    	int x = mat.getQuantidade();
-    	mat.setQuantidade(x- 1);	
-    }*/
-    
-    
-    
-    
+   
+   public int removerMaterial(String nome) {
+	   int indice = -1;
+       for (int i = 0; i < estoque1.size(); i++) {
+           MaterialConstrucao objeto = estoque1.get(i);
+           if (objeto.getNome().equals(nome)) {
+               indice = i;       
+           }
+       }
+       return indice;
+    }
     
     public void listarProdutos() {
     	System.out.println("Materiai de contrucao:");

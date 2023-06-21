@@ -1,21 +1,21 @@
-package view;
+ package view;
 import modelo.*;
+
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-/*import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;*/
-
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class BuscarProduto {
 	private JFrame janela = new JFrame("Buscar produto por código");
-	private JLabel busca = new JLabel("Digite o codigo do produto que você procura:");
+	private JLabel busca = new JLabel("Digite o nome do produto que você procura:");
 	private JTextField buscaProduto = new JTextField();
+	private JLabel whatF = new JLabel("Em qual filial deseja buscar o produto?");
 	private JButton buscar = new JButton("Buscar");
 	private JButton voltar = new JButton("Voltar");
+	private JList<String> nomes;
 	
 	public BuscarProduto(Dados banco) {
 		janela.setSize(600,200);
@@ -39,6 +39,47 @@ public class BuscarProduto {
             public void actionPerformed(ActionEvent e) {
             	new TelaInicial(banco);
                 janela.dispose();
+            }
+        });
+		buscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	
+            	janela.setSize(800,600);
+            	janela.remove(buscaProduto);
+            	janela.remove(buscar);
+            	janela.remove(busca);
+            	voltar.setBounds(550,500,100,40);
+            	janela.add(voltar);
+            	whatF.setBounds(200,55, 400, 50);
+            	whatF.setFont(new Font("Arial", Font.BOLD, 20));
+            	janela.add(whatF);
+            	
+            	nomes = new JList<>(banco.buscarProduto(buscaProduto.getText()));
+        		nomes.setBounds(350, 200, 100, 200);
+        		janela.add(nomes);
+        		nomes.addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent e) {
+                        if (!e.getValueIsAdjusting()) {
+                            String selectedValue = nomes.getSelectedValue(); 
+                            if(banco.ferramentaOrMatC(buscaProduto.getText())==0) {
+                            	new AdcFerramenta(banco,selectedValue,buscaProduto.getText(),1);
+                            	
+                            }
+                            if(banco.ferramentaOrMatC(buscaProduto.getText())==1) {
+                            	new AdcMatC(banco,selectedValue,buscaProduto.getText(),1);
+                            	
+                            }
+                            
+                    		
+                            
+                        }
+                    }
+                });
+            	
+            	
+            	
+            	
             }
         });
 

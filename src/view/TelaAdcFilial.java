@@ -14,13 +14,12 @@ import javax.swing.*;
 
 
 public class TelaAdcFilial {
-	private static JLabel label = new JLabel();
-	private static JLabel label2 = new JLabel();
-	private static JFrame adcFilial = new JFrame("Adicionar Filial");
-	private static JTextField nome = new JTextField();
-	private static JTextPane area =new JTextPane();
-	private static JButton filial = new JButton("Adicionar Filial");
-	
+	private  JLabel label = new JLabel();
+	private  JLabel label2 = new JLabel();
+	private  JFrame adcFilial = new JFrame("Adicionar Filial");
+	private  JTextField nome = new JTextField();
+	private  JTextPane area =new JTextPane();
+	private  JButton filial = new JButton("Adicionar Filial");
 	public TelaAdcFilial(Dados banco) {
 	
 		//Pegar Imagem de BackGround
@@ -59,6 +58,8 @@ public class TelaAdcFilial {
 		
 		filial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+             Filial f = new Filial(nome.getText());
+             banco.adicionarFilial(f);
             	new TelaInicial(banco);
                 adcFilial.dispose();
             }

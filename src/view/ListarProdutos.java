@@ -24,7 +24,9 @@ public class ListarProdutos {
 	private JButton ferramenta = new JButton("Ferramentas");
 	private JButton voltar = new JButton("Voltar");
 	private JButton remover = new JButton("Remover");
-	private int indexDoElementoSelecionado;
+	private JButton atualizar = new JButton("Atualizar");
+	private JButton adcFerramenta = new JButton("Adicionar material");
+	private String nomeIndex;
 	
 	
 	public ListarProdutos(Filial banco, Dados volta){	
@@ -75,8 +77,10 @@ public class ListarProdutos {
 		
 		material.setBounds(1093,130,170,60);
 		ferramenta.setBounds(1093,200,170,60);
+		adcFerramenta.setBounds(1093,270,170,60);
 		voltar.setBounds(1093,605,170,60);
 		remover.setBounds(15,605,170,60);
+		atualizar.setBounds(200, 605, 170, 60);
 		produtos.setBounds(190,100, 900, 500);
 		filtro.setBounds(1150,10,200,200);
 		
@@ -84,20 +88,28 @@ public class ListarProdutos {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				int elemento = produtosAdicionados.getSelectedIndex();
-				setIndexDoElementoSelecionado(elemento);
+				try{String texto = (String) produtosAdicionados.getSelectedValue();
+				int indiceInicio = texto.indexOf(":")+2;
+				int indiceFim = texto.indexOf(",");
+				String nome = texto.substring(indiceInicio, indiceFim);
+				setNomeIndex(nome);
+				}catch (Exception e2) {					
+				}
 			}
-		});
+		});	
 		
-		
-		remover.addActionListener(new ActionListener() {
-			
+		remover.addActionListener(new ActionListener() {		
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(indexDoElementoSelecionado);
-				
-				banco.getFerramentas().remove(getIndexDoElementoSelecionado());
-				JOptionPane.showMessageDialog(null, "Veículo removido com sucesso.");
+			public void actionPerformed(ActionEvent e) {			  
+				try {
+					int a = banco.removerFerramenta(nomeIndex);
+					banco.getFerramentas().remove(a);
+					JOptionPane.showMessageDialog(null, "Produto removido com sucesso.");
+				} catch (Exception e1) {
+					int b = banco.removerMaterial(nomeIndex);
+					banco.getMateriais().remove(b);
+					JOptionPane.showMessageDialog(null, "Produto removido com sucesso.");
+				}					
 				//janela.dispose();
 			}
 		});
@@ -127,7 +139,31 @@ public class ListarProdutos {
 	          }
 	        });
 		
+		adcFerramenta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AdcMat(volta);
+				janela.dispose();
+				
+			}
+
+		});
 		
+		atualizar.addActionListener(new ActionListener(){
+	        public void actionPerformed(ActionEvent e){
+	            ((DefaultListModel<Object>)(produtosAdicionados.getModel())).clear();
+	        	for(int i = 0; i < banco.getMateriais().size(); i++) {
+	    			modelo.addElement(banco.getMateriais().get(i).toString());
+	    		}
+	        	for(int i = 0; i < banco.getFerramentas().size(); i++) {
+	    			modelo.addElement(banco.getFerramentas().get(i).toString());
+	    		}
+	          }
+	        });
+		
+		janela.add(adcFerramenta);
+		janela.add(atualizar);
 		janela.add(remover);
 		janela.add(voltar);
 		janela.add(material);
@@ -138,10 +174,9 @@ public class ListarProdutos {
 		janela.setVisible(true);
 	}
 	
-	public void setIndexDoElementoSelecionado(int index) {
-		indexDoElementoSelecionado = index;
+	public void setNomeIndex(String nome) {
+		nomeIndex = nome;
 	}
-	public int getIndexDoElementoSelecionado() {
-		return indexDoElementoSelecionado;
-	}
+	
 }
+
