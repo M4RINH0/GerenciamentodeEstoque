@@ -28,6 +28,7 @@ public class ListarProdutos {
 	private JButton editar = new JButton("Editar");
 	private JButton adcFerramenta = new JButton("Adicionar Produto");
 	private String nomeIndex;
+	private String nomeFilial;
 	
 	
 	public ListarProdutos(Dados volta){
@@ -88,15 +89,23 @@ public class ListarProdutos {
 		produtosAdicionados.addListSelectionListener((ListSelectionListener) new ListSelectionListener() {		
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				try{String texto = (String) produtosAdicionados.getSelectedValue();
-				int indiceInicio = texto.indexOf(":")+2;
-				int indiceFim = texto.indexOf(",");
-				String nome = texto.substring(indiceInicio, indiceFim);
-				setNomeIndex(nome);
-				}catch (Exception e2) {					
-				}
+				String texto = (String) produtosAdicionados.getSelectedValue();
+				try{				
+					int indiceInicio = texto.indexOf(":")+2;
+					int indiceFim = texto.indexOf(",");
+					String nome = texto.substring(indiceInicio, indiceFim);
+					setNomeIndex(nome);
+					System.out.println(indiceInicio);
+					
+					int indiceRun = texto.indexOf(";")+2;
+					int indiceEnd = texto.indexOf("-");
+					String nome2 = texto.substring(indiceRun, indiceEnd);
+					setNomeFilial(nome2);
+					
+				}catch (Exception e2) {}
 			}
 		});	
+		
 		
 		remover.addActionListener(new ActionListener() {		
 			@Override
@@ -149,16 +158,14 @@ public class ListarProdutos {
 		
 		editar.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
-                    String[] selectedValue = volta.buscarProduto(nomeIndex); 
                     if(volta.ferramentaOrMatC(nomeIndex)==0) {
-                    	new AdcFerramenta(volta,selectedValue[0],nomeIndex,1);
+                    	new AdcFerramenta(volta,nomeFilial,nomeIndex,1);
                     	janela.dispose();
                     }
                     if(volta.ferramentaOrMatC(nomeIndex)==1) {
-                    	new AdcMatC(volta,selectedValue[0],nomeIndex,1);
+                    	new AdcMatC(volta,nomeFilial,nomeIndex,1);
                     	janela.dispose();
-                    }   
-                                    
+                    }                                      
 	          }
 	        });
 		
@@ -177,6 +184,10 @@ public class ListarProdutos {
 	
 	public void setNomeIndex(String nome) {
 		nomeIndex = nome;
+	}
+	
+	public void setNomeFilial(String filial) {
+		nomeFilial = filial;
 	}
 	
 }

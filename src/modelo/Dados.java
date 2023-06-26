@@ -38,10 +38,10 @@ public class Dados{
 		produtosGeral.clear();
 		for(Filial m : banco) {
 			for(Ferramentas e : m.getFerramentas()) {
-				produtosGeral.add(e.toString());
+				produtosGeral.add(e.toString() + "; " + m.getNome()+"-");
 			}	
 			for(MaterialConstrucao j : m.getMateriais()) {
-				produtosGeral.add(j.toString());
+				produtosGeral.add(j.toString()+ "; " + m.getNome() + "-");
 			}
 		}
 		
@@ -50,41 +50,46 @@ public class Dados{
 	
 	public void removerFerramentas(String nome) {
 		int indice = -1;
-		int excluir = -1;
+		int excluir = 1000;
 		for(Filial m : banco) {
 			indice = -1;
+			excluir = 1000;
 			for(Ferramentas e : m.getFerramentas()) {
 				indice++;
 				if(e.getNome().equals(nome)) {
 					excluir = indice;
 				}
 			}
+			if(excluir == indice) {
 			m.getFerramentas().remove(excluir);
+			}
 		}	
 	}
 	
 	public void removerMateriais(String nome) {
 		int indice = -1;
-		int excluir = -1;
+		int excluir = 1000;
 		for(Filial m : banco) {
 			indice = -1;
+			excluir = 1000;
 			for(MaterialConstrucao e : m.getMateriais()) {
 				indice++;
 				if(e.getNome().equals(nome)) {
 					excluir = indice;
 				}
-				m.getMateriais().remove(excluir);
-			}	
+			}
+			if(excluir == indice) {
+			m.getMateriais().remove(excluir);
+			}
 		}	
 	}
 	
-	public String[] buscandoFerramentas (String filial) {
-		String[] nome = new String[50];
-		int i = 0;
+	public ArrayList<String> buscandoFerramentas (String filial) {
+		ArrayList<String> nome = new ArrayList<String>();
 		for(Filial m : banco) {
-			if(m.getNome()==filial) {
+			if(m.getNome().equals(filial)) {
 				for(Ferramentas e : m.getFerramentas()) {
-					nome[i]=e.getNome();
+					nome.add(e.getNome());
 					i++;
 				}		
 			}
@@ -93,14 +98,12 @@ public class Dados{
 		
     }
 	
-	public String[] buscandoMatC (String filial) {
-		String[] nome = new String[50];
-		int i = 0;
+	public ArrayList<String> buscandoMatC (String filial) {
+		ArrayList<String> nome = new ArrayList<String>();
 		for(Filial m : banco) {
-			if(m.getNome()==filial) {
+			if(m.getNome().equals(filial)) {
 				for(MaterialConstrucao e : m.getMateriais()) {
-					nome[i]=e.getNome();
-					i++;
+					nome.add(e.getNome());
 				}
 				
 				
@@ -186,28 +189,21 @@ public class Dados{
 		
 	}
 	
-	public String[] buscarProduto(String nome) {
-		int i = 0;
-		String[] nomeFilial = new String[50];
-		String[] vazio = new String[0];
-		for(Filial m : banco) {		
+	public ArrayList<String> buscarProduto(String nome) {
+		ArrayList<String> nomeFilial = new ArrayList<>();
+		for(Filial m : banco) {
 			for(MaterialConstrucao t : m.getMateriais()) {
-				if(t.getNome().equals(nome)) {
-					nomeFilial[i]=m.getNome();			
+				if(t.getNome().equalsIgnoreCase(nome)) {
+							nomeFilial.add(m.getNome());
 				}
 			}
 			for(Ferramentas s : m.getFerramentas()) {
-				if(s.getNome().equals(nome)) {
-					nomeFilial[i]=m.getNome();
+				if(s.getNome().equalsIgnoreCase(nome)) {
+					nomeFilial.add(m.getNome());
+				}
 				}
 			}
-			i++;
-		}
-		if(nomeFilial[0] == null) {
-			return vazio;
-		}else {
-			return nomeFilial;
-		}
+			return nomeFilial;	
 	}
 	
 	public int ferramentaOrMatC(String nome) {	

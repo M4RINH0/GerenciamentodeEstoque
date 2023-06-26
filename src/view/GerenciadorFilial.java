@@ -133,11 +133,8 @@ public class GerenciadorFilial {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				tela.dispose();
-				new EstoqueF(banc,nomeBusca.getText());
-				
-				
+				new EstoqueF(banc,nomeBusca.getText());				
 			}
 			
 		});

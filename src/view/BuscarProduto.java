@@ -4,6 +4,7 @@ import modelo.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -15,7 +16,7 @@ public class BuscarProduto {
 	private JLabel whatF = new JLabel("Em qual filial deseja buscar o produto?");
 	private JButton buscar = new JButton("Buscar");
 	private JButton voltar = new JButton("Voltar");
-	private JList<String> nomes;
+	
 	
 	public BuscarProduto(Dados banco) {
 		janela.setSize(600,200);
@@ -54,9 +55,13 @@ public class BuscarProduto {
             	whatF.setFont(new Font("Arial", Font.BOLD, 20));
             	janela.add(whatF);
             	
-            	nomes = new JList<>(banco.buscarProduto(buscaProduto.getText()));
-            	ListModel<?> listModel = nomes.getModel();
-            	if(listModel.getSize() == 0) {
+            	DefaultListModel<String> modelo = new DefaultListModel<String>();
+        		
+        		modelo.addAll(banco.buscarProduto(buscaProduto.getText()));
+            	
+            	JList<String> nomes = new JList<String>();
+            	nomes.setModel(modelo);
+            	if(modelo.getSize() == 0) {
             		new TelaInicial(banco);
             		janela.dispose();
             		JOptionPane.showMessageDialog(null, "Produto não está cadastrado em nenhuma filial.");

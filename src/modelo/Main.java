@@ -12,9 +12,10 @@ public class Main {
 
         Filial filialA = new Filial("Filial A", "Douglas");
         Filial filialB = new Filial("Filial B", "Marco Túlio");
+        filialB.adicionarMaterialContrucao(material);
       //  Filial filialC = new Filial("Filial C");
         filialA.adicionarFerramenta(ferramenta);
-        filialB.adicionarMaterialContrucao(material);
+        filialA.adicionarMaterialContrucao(material);
         filialB.adicionarMaterialContrucao(material2);
         
         filialB.adicionarFerramenta(ferramenta2);

@@ -10,11 +10,14 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import modelo.Dados;
 
 public class EstoqueF {
@@ -57,8 +60,22 @@ public class EstoqueF {
 		ferramenta.setText("Ferramentas:");		
 		ferramenta.setForeground(Color.WHITE);
 		
-		nomes = new JList<>(banc.buscandoFerramentas(filial));
-		nomes2 = new JList<>(banc.buscandoMatC(filial));
+		DefaultListModel<String> modelo1 = new DefaultListModel<String>();
+		DefaultListModel<String> modelo2 = new DefaultListModel<String>();
+		
+		modelo1.addAll(banc.buscandoFerramentas(filial));
+		modelo2.addAll(banc.buscandoMatC(filial));
+		
+		nomes = new JList<>();
+		nomes.setModel(modelo1);
+		nomes2 = new JList<>();
+		nomes2.setModel(modelo2);
+		
+		if(modelo1.isEmpty() && modelo2.isEmpty()) {
+			tela.dispose();
+			new GerenciadorFilial(banc);
+			JOptionPane.showMessageDialog(null, "Filial não encontrada no sistema.");
+		}
 		
 		label.setText(filial + " :");
 		label.setFont(new Font("Arial", Font.BOLD, 50));
