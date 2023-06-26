@@ -55,6 +55,12 @@ public class BuscarProduto {
             	janela.add(whatF);
             	
             	nomes = new JList<>(banco.buscarProduto(buscaProduto.getText()));
+            	ListModel<?> listModel = nomes.getModel();
+            	if(listModel.getSize() == 0) {
+            		new TelaInicial(banco);
+            		janela.dispose();
+            		JOptionPane.showMessageDialog(null, "Produto não está cadastrado em nenhuma filial.");
+            	}
         		nomes.setBounds(350, 200, 100, 200);
         		janela.add(nomes);
         		nomes.addListSelectionListener(new ListSelectionListener() {
@@ -64,15 +70,12 @@ public class BuscarProduto {
                             String selectedValue = nomes.getSelectedValue(); 
                             if(banco.ferramentaOrMatC(buscaProduto.getText())==0) {
                             	new AdcFerramenta(banco,selectedValue,buscaProduto.getText(),1);
-                            	
+                            	janela.dispose();
                             }
                             if(banco.ferramentaOrMatC(buscaProduto.getText())==1) {
                             	new AdcMatC(banco,selectedValue,buscaProduto.getText(),1);
-                            	
-                            }
-                            
-                    		
-                            
+                            	janela.dispose();
+                            }                       
                         }
                     }
                 });

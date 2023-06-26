@@ -13,7 +13,27 @@ public class MaterialConstrucao extends Produto {
 	public String getMateriaPrima() {
 		return materiaPrima;
 	}
-
+	
+	public void setCodigoProduto(String codigoProduto) {
+		this.codigoProduto = codigoProduto;
+	}
+	
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+	
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public void setMateriaPrima(String materiaPrima) {
+		this.materiaPrima = materiaPrima;
+	}
+	
 	public String getCor() {
 		return cor;
 	}

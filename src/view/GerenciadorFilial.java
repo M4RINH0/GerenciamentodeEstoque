@@ -11,12 +11,6 @@ import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import modelo.Dados;
@@ -26,12 +20,13 @@ public class GerenciadorFilial {
 	private JFrame tela = new JFrame("Gerenciador de filial");
 	private JList<String> nomes;
 	private JList<String> opcs;
+	private JPanel filiais = new JPanel();
 	private Dados banc;
 	private JTextField nomeBusca = new JTextField();
 	private JButton buscar = new JButton("Buscar");
 	private JButton voltar = new JButton("Voltar");
 	private JLabel label = new JLabel();
-	
+	private DefaultListModel<String> modelo = new DefaultListModel<String>();
 	
 	String[] useropc = {"Excluir","Atualizar","Estoque","Criar"};
 	String selectedValue1;
@@ -66,13 +61,23 @@ public class GerenciadorFilial {
 		label.setIcon(imageIcon);
 		
 		
-		nomes = new JList<>(banc.filaisN());
+		
+		for(int i = 0; i < banc.getFilial().size(); i++) {
+			modelo.addElement(banc.getFilial().get(i).getNome());
+		}
+		
+		nomes = new JList<String>();
+		nomes.setModel(modelo);
+		
+		filiais.setBackground(Color.white);
+		filiais.add(nomes);
+		
 		opcs = new JList<>(useropc);
 		
 		nomes.setFont(new Font("Arial", Font.BOLD, 18));
 		nomes.setCellRenderer(new CenteredTextRenderer());
 		
-		nomes.setBounds(440, 100, 400, 400);
+		filiais.setBounds(440, 100, 400, 400);
 		opcs.setBounds(440, 510, 400, 75);
 		nomeBusca.setBounds(440, 600, 290, 30);
 		buscar.setBounds(740,600 , 100, 30);
@@ -80,7 +85,7 @@ public class GerenciadorFilial {
 		
 		
 		tela.add(voltar);
-		tela.add(nomes);
+		tela.add(filiais);
 		tela.add(opcs);
 		tela.add(nomeBusca);
 		tela.add(buscar);
@@ -92,21 +97,29 @@ public class GerenciadorFilial {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     selectedValue1 = nomes.getSelectedValue();        
-                    selector(opcsDesejada,selectedValue1);
-            		
-                    
+                    selector(opcsDesejada,selectedValue1);                  
                 }
             }
         });
+		
 		voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	new TelaInicial(banc);
                 tela.dispose();
             }
         });
+		
 		opcs.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+            	opcsDesejada = opcs.getSelectedValue();  
+            	if(opcsDesejada == "Atualizar") {
+        			((DefaultListModel<String>)(nomes.getModel())).clear();
+        			for(int i = 0; i < banc.getFilial().size(); i++) {
+        				modelo.addElement(banc.getFilial().get(i).getNome());
+
+        			}	
+        		}
                 if (!e.getValueIsAdjusting()) {
                     opcsDesejada = opcs.getSelectedValue();        
                     selector(opcsDesejada,selectedValue1);
@@ -115,6 +128,7 @@ public class GerenciadorFilial {
                 }
             }
         });
+		
 		buscar.addActionListener(new ActionListener() {
 
 			@Override
@@ -133,30 +147,31 @@ public class GerenciadorFilial {
 	}
 	public void selector(String opc, String filial) {
 		
-		if(opc=="excluir" && filial != null) {
-			banc.excluirFilial(filial);
-			new GerenciadorFilial(banc);
-			
-			
+		if(opc=="Excluir" && filial != null) {	
+			System.out.println(filial);
+			int a = banc.excluirFilial(filial);
+			banc.getFilial().remove(a);
+			JOptionPane.showMessageDialog(null, "Filial removida com sucesso.");					
 			}
 		if(opc=="Estoque" && filial != null) {
 			tela.dispose();
-			new EstoqueF(banc,filial);
-			
-			
+			new EstoqueF(banc,filial);			
 		}
 		if(opc == "Criar") {
 			tela.dispose();
 			new TelaAdcFilial(banc);
 		}
 		
-		
-		
 	}
 }
 
 class CenteredTextRenderer extends DefaultListCellRenderer {
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         label.setHorizontalAlignment(SwingConstants.CENTER); // Definindo a centralização do texto

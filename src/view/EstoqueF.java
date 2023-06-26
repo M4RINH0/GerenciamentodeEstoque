@@ -48,10 +48,15 @@ public class EstoqueF {
 		tela.setLocationRelativeTo(null);
 		tela.setResizable(false);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		matC.setText("Materiais de construção:");
+		matC.setForeground(Color.WHITE);
 		matC.setFont(new Font("Arial", Font.BOLD, 30));
-		ferramenta.setFont(new Font("Arial", Font.BOLD, 30));		
+		
+		ferramenta.setFont(new Font("Arial", Font.BOLD, 30));	
 		ferramenta.setText("Ferramentas:");		
+		ferramenta.setForeground(Color.WHITE);
+		
 		nomes = new JList<>(banc.buscandoFerramentas(filial));
 		nomes2 = new JList<>(banc.buscandoMatC(filial));
 		
@@ -64,11 +69,11 @@ public class EstoqueF {
 		label.setIcon(imageIcon);
 		
 		
-		nomes.setBounds(150, 0160, 400, 400);
-		nomes2.setBounds(730, 0160, 400, 400);
+		nomes.setBounds(150, 160, 400, 400);
+		nomes2.setBounds(730, 160, 400, 400);
 		voltar.setBounds(1093,605,170,60);
-		ferramenta.setBounds(150, 60, 400, 50);
-		matC.setBounds(730, 60, 400, 50);
+		ferramenta.setBounds(150, 100, 400, 50);
+		matC.setBounds(730, 100, 400, 50);
 		
 		
 		tela.add(voltar);

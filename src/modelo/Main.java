@@ -10,17 +10,15 @@ public class Main {
         MaterialConstrucao material = new MaterialConstrucao("M001", 100.0, "Branco", "cimento", "acetato de polivinila");
         MaterialConstrucao material2 = new MaterialConstrucao("D001", 100.0, "Branco", "Duglas", "agua");
 
-        Filial filialA = new Filial("Filial A");
-        Filial filialB = new Filial("Filial B");
+        Filial filialA = new Filial("Filial A", "Douglas");
+        Filial filialB = new Filial("Filial B", "Marco Túlio");
       //  Filial filialC = new Filial("Filial C");
         filialA.adicionarFerramenta(ferramenta);
-        filialA.adicionarFerramenta(ferramenta2);
-        filialA.adicionarMaterialContrucao(material);
-        filialA.adicionarMaterialContrucao(material2);
         filialB.adicionarMaterialContrucao(material);
-        
-        //filialC.adicionarFerramenta(ferramenta2);
         filialB.adicionarMaterialContrucao(material2);
+        
+        filialB.adicionarFerramenta(ferramenta2);
+
         Dados SQL = new Dados();
         
         SQL.adicionarFilial(filialA);

@@ -1,11 +1,20 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import modelo.MaterialConstrucao;
@@ -24,15 +33,36 @@ public class AdcMatC {
 	private  JLabel materiaPrima = new JLabel();
 	private  JLabel price = new JLabel();
 	private  JButton salvar = new JButton("Salvar");
+	private JLabel label = new JLabel();
+	
 	
 	public AdcMatC(Dados banc,String filial,String nomeP,int opc) {
+		//Pegar Imagem de BackGround
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(new File("backgroundAdc.jpg"));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		Image dimg = img.getScaledInstance(1280,650,Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(dimg);
+				
+		label.setText("Adicionar Material de Construção");
+		label.setFont(new Font("Arial", Font.BOLD, 50));
+		label.setForeground(Color.BLACK);
+		label.setHorizontalTextPosition(JLabel.CENTER);
+		label.setVerticalTextPosition(JLabel.TOP);
+		label.setBounds(0, 0, 1280, 720);
+		label.setIcon(imageIcon);		
+			
+		
 		tela.setVisible(true);
 		tela.setSize(1280,720);
 		tela.setLayout(null);
 		tela.setLocationRelativeTo(null);
 		tela.setResizable(false);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		nome.setBounds(490, 100, 300, 50);
+		
 		
 		if(opc==1) {
 			MaterialConstrucao s = banc.dadosMatC(nomeP, filial);
@@ -42,21 +72,31 @@ public class AdcMatC {
 			matP.setText(s.getMateriaPrima());
 			valor.setText(Double.toString(s.getValor()));
 		}
+	
+		
+		nome.setBounds(490, 100, 300, 50);
 		codigoP.setBounds(490, 200, 300, 50);
 		matP.setBounds(490, 300, 300, 50);
 		cor.setBounds(490, 400, 300, 50);
 		valor.setBounds(490, 500, 300, 50);
 		name.setBounds(490, 50, 300, 50);
-		name.setText("Nome: ");
 		code.setBounds(490, 150, 300, 50);
-		code.setText("Codigo do Produto: ");
 		color.setBounds(490, 250, 300, 50);
-		color.setText("Cor: ");
 		materiaPrima.setBounds(490, 350, 300, 50);
-		materiaPrima.setText("Materia Prima: ");
 		price.setBounds(490, 450, 300, 50);
-		price.setText("Valor: ");
 		salvar.setBounds(1100, 600, 70, 50);
+		
+		name.setText("Nome: ");	
+		name.setForeground(Color.WHITE);
+		code.setText("Codigo do Produto: ");		
+		code.setForeground(Color.WHITE);
+		color.setText("Cor: ");	
+		color.setForeground(Color.WHITE);
+		materiaPrima.setText("Materia Prima: ");
+		materiaPrima.setForeground(Color.WHITE);
+		price.setText("Valor: ");
+		price.setForeground(Color.WHITE);
+		
 		salvar.addActionListener(new ActionListener() {
 
 			@Override
@@ -66,12 +106,22 @@ public class AdcMatC {
 				String matPM = matP.getText();
 				String valorM = valor.getText();
 				String corM = cor.getText();
-				if(opc==1) {
-			//		banc.removerMat(nomeP, filial);
+				if(opc!=1) {
+					MaterialConstrucao f = new MaterialConstrucao(codigoM,Double.parseDouble(valorM),
+							corM,nomeM,matPM);
+					banc.adcmatC(f, filial);
+					JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
 				}
-				MaterialConstrucao f = new MaterialConstrucao(codigoM,Double.parseDouble(valorM),corM,nomeM,matPM);
-				banc.adcmatC(f, filial);
-				
+				if(opc==1) {
+					MaterialConstrucao s = banc.dadosMatC(nomeP, filial);
+					s.setNome(nome.getText());
+					s.setCodigoProduto(codigoP.getText());
+					s.setCor(cor.getText());;
+					s.setMateriaPrima(matP.getText());
+					s.setValor(Double.parseDouble(valor.getText()));
+					JOptionPane.showMessageDialog(null, "Produto editado com sucesso.");
+				}
+												
 				tela.dispose();
 				new TelaInicial(banc);
 				
@@ -91,6 +141,7 @@ public class AdcMatC {
 		tela.add(materiaPrima);
 		tela.add(price);
 		tela.add(salvar);
+		tela.add(label);
 	}
 
 }

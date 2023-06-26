@@ -16,10 +16,14 @@ import javax.swing.*;
 public class TelaAdcFilial {
 	private  JLabel label = new JLabel();
 	private  JLabel label2 = new JLabel();
+	private  JLabel texto = new JLabel();
 	private  JFrame adcFilial = new JFrame("Adicionar Filial");
 	private  JTextField nome = new JTextField();
+	private  JTextField gerente = new JTextField();
 	private  JTextPane area =new JTextPane();
 	private  JButton filial = new JButton("Adicionar Filial");
+	private JButton voltar = new JButton("Voltar");
+	
 	public TelaAdcFilial(Dados banco) {
 	
 		//Pegar Imagem de BackGround
@@ -29,9 +33,14 @@ public class TelaAdcFilial {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		
 		label2.setText("Digite o nome para a Filial:");
 		label2.setFont(new Font("Arial", Font.ITALIC, 30));
 		label2.setForeground(Color.WHITE);
+		
+		texto.setText("Digite o nome para o Gerente da Filial:");
+		texto.setFont(new Font("Arial", Font.ITALIC, 30));
+		texto.setForeground(Color.WHITE);
 		
 		area.setText("Ao criar uma nova filial ela será guardada em nosso banco de dados"
 				+ " e conseguirá adicionar novos produtos na mesma!");
@@ -52,30 +61,46 @@ public class TelaAdcFilial {
 		
 		nome.setFont(new Font("Arial", Font.PLAIN, 30));
 		
+		gerente.setFont(new Font("Arial", Font.PLAIN, 30));
+		
 		Image dimg = img.getScaledInstance(adcFilial.getWidth(),650,
 				Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(dimg);
 		
 		filial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-             Filial f = new Filial(nome.getText());
+             Filial f = new Filial(nome.getText(), gerente.getText());
              banco.adicionarFilial(f);
-            	new TelaInicial(banco);
+             JOptionPane.showMessageDialog(null, "Filial criada com sucesso.");	
+             new TelaInicial(banco);
+             adcFilial.dispose();
+            }
+        });
+		
+		voltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	new GerenciadorFilial(banco);
                 adcFilial.dispose();
             }
         });
 		
-		filial.setBounds(50,500,180,60);
+		voltar.setBounds(1093,600,170,60);
+		filial.setBounds(50,600,180,60);
 		label2.setBounds(50,210,500,45);
+		texto.setBounds(50,300,800,45);
 		label.setBounds(0, 0, 1280, 720);
 		nome.setBounds(50,250, 500,45);
-		area.setBounds(50,300, 920,100);  
+		gerente.setBounds(50,350, 500,45);
+		area.setBounds(50,400, 920,100);  
 		
 		label.setIcon(imageIcon);
 		adcFilial.setVisible(true);
 		
+		adcFilial.add(gerente);
+		adcFilial.add(voltar);
 		adcFilial.add(filial);
 		adcFilial.add(area);
+		adcFilial.add(texto);
 		adcFilial.add(label2);
 		adcFilial.add(nome);
 		adcFilial.add(label);

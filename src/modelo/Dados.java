@@ -5,10 +5,77 @@ import java.util.ArrayList;
 public class Dados{
 	public ArrayList<Filial> banco = new ArrayList<Filial>();
 	public ArrayList<Filial> bancoReserva = new ArrayList<Filial>();
+	public ArrayList<String> produtosGeral = new ArrayList<String>();
+	public ArrayList<String> ferramentasGeral = new ArrayList<String>();
+	public ArrayList<String> materiaisGeral = new ArrayList<String>();
 	
 	public void adicionarFilial(Filial filial) {
 		
 		banco.add(filial);
+	}
+	
+	public ArrayList<String> getFerramentasGeral(){
+		ferramentasGeral.clear();
+		for(Filial m : banco) {
+			for(Ferramentas e : m.getFerramentas()) {
+				ferramentasGeral.add(e.toString());
+			}	
+		}		
+		return ferramentasGeral;
+	}
+	
+	public ArrayList<String> getMateriaisGeral(){
+		materiaisGeral.clear();
+		for(Filial m : banco) {
+			for(MaterialConstrucao j : m.getMateriais()) {
+				materiaisGeral.add(j.toString());
+			}	
+		}		
+		return materiaisGeral;
+	}
+	
+	public ArrayList<String> getGeral(){
+		produtosGeral.clear();
+		for(Filial m : banco) {
+			for(Ferramentas e : m.getFerramentas()) {
+				produtosGeral.add(e.toString());
+			}	
+			for(MaterialConstrucao j : m.getMateriais()) {
+				produtosGeral.add(j.toString());
+			}
+		}
+		
+		return produtosGeral;
+	}
+	
+	public void removerFerramentas(String nome) {
+		int indice = -1;
+		int excluir = -1;
+		for(Filial m : banco) {
+			indice = -1;
+			for(Ferramentas e : m.getFerramentas()) {
+				indice++;
+				if(e.getNome().equals(nome)) {
+					excluir = indice;
+				}
+			}
+			m.getFerramentas().remove(excluir);
+		}	
+	}
+	
+	public void removerMateriais(String nome) {
+		int indice = -1;
+		int excluir = -1;
+		for(Filial m : banco) {
+			indice = -1;
+			for(MaterialConstrucao e : m.getMateriais()) {
+				indice++;
+				if(e.getNome().equals(nome)) {
+					excluir = indice;
+				}
+				m.getMateriais().remove(excluir);
+			}	
+		}	
 	}
 	
 	public String[] buscandoFerramentas (String filial) {
@@ -19,9 +86,7 @@ public class Dados{
 				for(Ferramentas e : m.getFerramentas()) {
 					nome[i]=e.getNome();
 					i++;
-				}
-				
-				
+				}		
 			}
 		}
 		return nome;
@@ -60,20 +125,15 @@ public class Dados{
 	
 	
 
-	public void excluirFilial(String nome) {
-		System.out.println(banco.toString());
-		for(Filial m : banco) {			
-			if(m.getNome()!= nome) {
-				bancoReserva.add(m);
-				
-			}
-		}
-	
-		banco = bancoReserva;
-		bancoReserva.clear();
-		System.out.println(banco.toString());
-		
-		filaisN();
+	public int excluirFilial(String nome) {
+		   int indice = -1;
+	       for (int i = 0; i < banco.size(); i++) {
+	           Filial objeto = banco.get(i);
+	           if (objeto.getNome().equals(nome)) {
+	               indice = i;       
+	           }
+	       }
+	       return indice;
 		}
 	
 	public void adcFerramenta(Ferramentas f, String filial) {
@@ -129,13 +189,11 @@ public class Dados{
 	public String[] buscarProduto(String nome) {
 		int i = 0;
 		String[] nomeFilial = new String[50];
-		for(Filial m : banco) {
-			
-			
+		String[] vazio = new String[0];
+		for(Filial m : banco) {		
 			for(MaterialConstrucao t : m.getMateriais()) {
 				if(t.getNome().equals(nome)) {
-					nomeFilial[i]=m.getNome();
-				
+					nomeFilial[i]=m.getNome();			
 				}
 			}
 			for(Ferramentas s : m.getFerramentas()) {
@@ -145,18 +203,19 @@ public class Dados{
 			}
 			i++;
 		}
-		return nomeFilial;
+		if(nomeFilial[0] == null) {
+			return vazio;
+		}else {
+			return nomeFilial;
+		}
 	}
 	
 	public int ferramentaOrMatC(String nome) {	
 		//0 para ferramentas e 1 para matC
-		for(Filial m : banco) {
-			
-			
+		for(Filial m : banco) {		
 			for(MaterialConstrucao t : m.getMateriais()) {
 				if(t.getNome().equals(nome)) {
-					return 1;
-				
+					return 1;				
 				}
 			}
 			for(Ferramentas s : m.getFerramentas()) {

@@ -5,16 +5,22 @@ import java.util.List;
 
 public class Filial {
     private String nome;
+    private String gerente;
     private List<MaterialConstrucao> estoque1;
     private List<Ferramentas> estoque2;
     
 
-    public Filial(String nome) {
-        this.nome = nome;    
+    public Filial(String nome, String gerente) {
+        this.nome = nome;
+        this.gerente = gerente;
         this.estoque1 = new ArrayList<>();
         this.estoque2 = new ArrayList<>();     
     }
-
+    
+    public String getGerente() {
+        return gerente;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -33,28 +39,6 @@ public class Filial {
 
     public void adicionarFerramenta(Ferramentas ferramenta) {
     	estoque2.add(ferramenta);
-    }
-    
-   public int removerFerramenta(String nome) {
-	   int indice = -1;
-       for (int i = 0; i < estoque2.size(); i++) {
-           Ferramentas objeto = estoque2.get(i);
-           if (objeto.getNome().equals(nome)) {
-               indice = i;       
-           }
-       }
-       return indice;
-    }
-   
-   public int removerMaterial(String nome) {
-	   int indice = -1;
-       for (int i = 0; i < estoque1.size(); i++) {
-           MaterialConstrucao objeto = estoque1.get(i);
-           if (objeto.getNome().equals(nome)) {
-               indice = i;       
-           }
-       }
-       return indice;
     }
     
     public void listarProdutos() {

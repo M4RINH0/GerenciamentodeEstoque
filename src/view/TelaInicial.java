@@ -62,7 +62,7 @@ public class TelaInicial {
 		
 		listarProdutos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new ListarProdutos(banco.getFilial().get(0), banco);
+                new ListarProdutos(banco);
                 janela.dispose();
             }
         });

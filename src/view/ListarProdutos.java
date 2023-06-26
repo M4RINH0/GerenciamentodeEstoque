@@ -25,11 +25,13 @@ public class ListarProdutos {
 	private JButton voltar = new JButton("Voltar");
 	private JButton remover = new JButton("Remover");
 	private JButton atualizar = new JButton("Atualizar");
-	private JButton adcFerramenta = new JButton("Adicionar material");
+	private JButton editar = new JButton("Editar");
+	private JButton adcFerramenta = new JButton("Adicionar Produto");
 	private String nomeIndex;
 	
 	
-	public ListarProdutos(Filial banco, Dados volta){	
+	public ListarProdutos(Dados volta){
+		
 		//Pegar Imagem de BackGround
 		BufferedImage img = null;
 		try {
@@ -45,6 +47,7 @@ public class ListarProdutos {
 		filtro.setForeground(Color.WHITE);
 		
 		janela.setSize(1280,720);
+	
 		janela.setLayout(null);
 		janela.setLocationRelativeTo(null);
 		janela.setResizable(false);
@@ -62,12 +65,9 @@ public class ListarProdutos {
 		
 		DefaultListModel<Object> modelo = new DefaultListModel<Object>();
 		
-		for(int i = 0; i < banco.getMateriais().size(); i++) {
-			modelo.addElement(banco.getMateriais().get(i).toString());
-		}
-		for(int i = 0; i < banco.getFerramentas().size(); i++) {
-			modelo.addElement(banco.getFerramentas().get(i).toString());
-		}
+		modelo.addAll(volta.getGeral());
+		
+
 		
 		JList<Object> produtosAdicionados = new JList<Object>();
 		produtosAdicionados.setModel(modelo);
@@ -77,15 +77,15 @@ public class ListarProdutos {
 		
 		material.setBounds(1093,130,170,60);
 		ferramenta.setBounds(1093,200,170,60);
-		adcFerramenta.setBounds(1093,270,170,60);
+		adcFerramenta.setBounds(15,130,170,60);
+		editar.setBounds(15, 200, 170, 60);
 		voltar.setBounds(1093,605,170,60);
 		remover.setBounds(15,605,170,60);
 		atualizar.setBounds(200, 605, 170, 60);
 		produtos.setBounds(190,100, 900, 500);
 		filtro.setBounds(1150,10,200,200);
 		
-		produtosAdicionados.addListSelectionListener((ListSelectionListener) new ListSelectionListener() {
-			
+		produtosAdicionados.addListSelectionListener((ListSelectionListener) new ListSelectionListener() {		
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				try{String texto = (String) produtosAdicionados.getSelectedValue();
@@ -101,16 +101,10 @@ public class ListarProdutos {
 		remover.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {			  
-				try {
-					int a = banco.removerFerramenta(nomeIndex);
-					banco.getFerramentas().remove(a);
+					volta.removerFerramentas(nomeIndex);
+					volta.removerMateriais(nomeIndex);
 					JOptionPane.showMessageDialog(null, "Produto removido com sucesso.");
-				} catch (Exception e1) {
-					int b = banco.removerMaterial(nomeIndex);
-					banco.getMateriais().remove(b);
-					JOptionPane.showMessageDialog(null, "Produto removido com sucesso.");
-				}					
-				//janela.dispose();
+									
 			}
 		});
 		
@@ -124,18 +118,14 @@ public class ListarProdutos {
 		material.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
 	            ((DefaultListModel<Object>)(produtosAdicionados.getModel())).clear();
-	        	for(int i = 0; i < banco.getMateriais().size(); i++) {
-	    			modelo.addElement(banco.getMateriais().get(i).toString());
-	    		}
+	        	modelo.addAll(volta.getMateriaisGeral());
 	          }
 	        });
 		
 		ferramenta.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
 	            ((DefaultListModel<Object>)(produtosAdicionados.getModel())).clear();
-	    		for(int i = 0; i < banco.getFerramentas().size(); i++) {
-	    			modelo.addElement(banco.getFerramentas().get(i).toString());
-	    		}
+	    		modelo.addAll(volta.getFerramentasGeral());
 	          }
 	        });
 		
@@ -153,15 +143,26 @@ public class ListarProdutos {
 		atualizar.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
 	            ((DefaultListModel<Object>)(produtosAdicionados.getModel())).clear();
-	        	for(int i = 0; i < banco.getMateriais().size(); i++) {
-	    			modelo.addElement(banco.getMateriais().get(i).toString());
-	    		}
-	        	for(int i = 0; i < banco.getFerramentas().size(); i++) {
-	    			modelo.addElement(banco.getFerramentas().get(i).toString());
-	    		}
+	           modelo.addAll(volta.getGeral());
 	          }
 	        });
 		
+		editar.addActionListener(new ActionListener(){
+	        public void actionPerformed(ActionEvent e){
+                    String[] selectedValue = volta.buscarProduto(nomeIndex); 
+                    if(volta.ferramentaOrMatC(nomeIndex)==0) {
+                    	new AdcFerramenta(volta,selectedValue[0],nomeIndex,1);
+                    	janela.dispose();
+                    }
+                    if(volta.ferramentaOrMatC(nomeIndex)==1) {
+                    	new AdcMatC(volta,selectedValue[0],nomeIndex,1);
+                    	janela.dispose();
+                    }   
+                                    
+	          }
+	        });
+		
+		janela.add(editar);
 		janela.add(adcFerramenta);
 		janela.add(atualizar);
 		janela.add(remover);
