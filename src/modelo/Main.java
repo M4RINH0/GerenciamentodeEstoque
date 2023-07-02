@@ -12,8 +12,6 @@ public class Main {
 
         Filial filialA = new Filial("Filial A", "Douglas");
         Filial filialB = new Filial("Filial B", "Marco Túlio");
-        filialB.adicionarMaterialContrucao(material);
-      //  Filial filialC = new Filial("Filial C");
         filialA.adicionarFerramenta(ferramenta);
         filialA.adicionarMaterialContrucao(material);
         filialB.adicionarMaterialContrucao(material2);
@@ -23,22 +21,9 @@ public class Main {
         Dados SQL = new Dados();
         
         SQL.adicionarFilial(filialA);
-        //SQL.excluirFilial("Filial A");
+
         SQL.adicionarFilial(filialB);
-        /*SQL.adicionarFilial(filialB);
-         
-        SQL.adicionarFilial(filialC);
-        SQL.listarTudo();
-        System.out.println("-------------------------------------------------------------------");        
-        //SQL.buscarFilial("Filial A");
-        //SQL.buscarProduto("F001");
-        */
-        //SQL.removerFerramenta("Chave de C","Filial A");
-        //new EstoqueF(SQL,"Filial A");
-        //new GerenciadorFilial(SQL);
-        //SQL.removerMat("cimento", "Filial A");
-        //AdcMatC tela = new AdcMatC(SQL,"Filial A","cimento",1);
-        //new EstoqueF(SQL,"Filial A");
+
         new TelaInicial(SQL);
         
         

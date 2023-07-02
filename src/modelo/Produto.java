@@ -1,5 +1,9 @@
 package modelo;
-
+/**
+ * classe abstrata de um produto
+ * @author mtuli
+ *
+ */
 public abstract class Produto {
 	protected String codigoProduto;
 	protected double valor;

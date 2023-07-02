@@ -14,7 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+/**
+ * Classe que representa a tela em que o usuario realizara o CRUD de produtos
+ * @author mtuli
+ *
+ */
 public class ListarProdutos {
 	private JFrame janela = new JFrame("Listagem");
 	private JPanel produtos = new JPanel();
@@ -30,7 +34,10 @@ public class ListarProdutos {
 	private String nomeIndex;
 	private String nomeFilial;
 	
-	
+	/**
+	 * Construtor que necessita apenas do banco de dados para a realização do CRUD
+	 * @param banco de dados
+	 */
 	public ListarProdutos(Dados volta){
 		
 		//Pegar Imagem de BackGround
@@ -95,7 +102,6 @@ public class ListarProdutos {
 					int indiceFim = texto.indexOf(",");
 					String nome = texto.substring(indiceInicio, indiceFim);
 					setNomeIndex(nome);
-					System.out.println(indiceInicio);
 					
 					int indiceRun = texto.indexOf(";")+2;
 					int indiceEnd = texto.indexOf("-");

@@ -1,9 +1,20 @@
 package modelo;
-
+/**
+ * Classe com atributos de um material de construcao
+ * @author mtuli
+ *
+ */
 public class MaterialConstrucao extends Produto {
 	private String cor;
 	private String materiaPrima;
-
+	/**
+	 * Construtor que recebe os atributos de um material de construcao
+	 * @param codigoProduto
+	 * @param valor
+	 * @param cor
+	 * @param nome
+	 * @param materiaPrima
+	 */
 	public MaterialConstrucao(String codigoProduto, double valor, String cor, String nome, String materiaPrima) {
 		super(codigoProduto, valor, nome);
 		this.cor = cor;

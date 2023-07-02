@@ -14,7 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+/**
+ * Classe em que representa a tela em que o o usuario define a filial e o tipo de produto se deseja incluir no estoque
+ * @author mtuli
+ *
+ */
 public class AdcMat  {
 	private JFrame tela = new JFrame("Adicionar produto");
 	private JButton matC = new JButton("Material de contrução");
@@ -26,7 +30,11 @@ public class AdcMat  {
 	private Dados banc = new Dados();
 	private JLabel label = new JLabel();
 	
-	
+	/**
+	 * Construtor da classe em que necessita de apenas as informações do banco de dados para
+	 * poder funcionar 
+	 * @param banc
+	 */
 	public AdcMat(Dados banc) {
 		//Pegar Imagem de BackGround
 		BufferedImage img = null;
@@ -113,6 +121,12 @@ public class AdcMat  {
 		
 		
 		}
+	/**
+	 * A função selector funciona de maneira em que ela só permite abrir a proxima tela  
+	 * se as duas opções(filial e tipo do produto) estiverem sido escolhidas 
+	 * @param opção
+	 * @param filial selecionada
+	 */
 	public void selector(int op, String p) {
 		if(op==1 && p!=null) {
 			new AdcFerramenta(banc,p,"",2);

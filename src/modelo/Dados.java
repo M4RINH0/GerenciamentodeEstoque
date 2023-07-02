@@ -1,6 +1,11 @@
 package modelo;
 
 import java.util.ArrayList;
+/**
+ * Classe responsavel pelos CRUDs e por salvar informações
+ * @author mtuli
+ *
+ */
 
 public class Dados{
 	public ArrayList<Filial> banco = new ArrayList<Filial>();
@@ -8,7 +13,10 @@ public class Dados{
 	public ArrayList<String> produtosGeral = new ArrayList<String>();
 	public ArrayList<String> ferramentasGeral = new ArrayList<String>();
 	public ArrayList<String> materiaisGeral = new ArrayList<String>();
-	
+	/**
+	 * Metodo responsavel por adicionar filial ao banco de dados
+	 * @param filial
+	 */
 	public void adicionarFilial(Filial filial) {
 		
 		banco.add(filial);
@@ -47,43 +55,53 @@ public class Dados{
 		
 		return produtosGeral;
 	}
-	
+	/**
+	 * Metodo responsavel por remover ferramenta especifica de alguma filial
+	 * @param nome
+	 */
 	public void removerFerramentas(String nome) {
 		int indice = -1;
 		int excluir = 1000;
 		for(Filial m : banco) {
-			indice = -1;
-			excluir = 1000;
-			for(Ferramentas e : m.getFerramentas()) {
-				indice++;
-				if(e.getNome().equals(nome)) {
-					excluir = indice;
+				indice = -1;
+				excluir = 1000;
+				for(Ferramentas e : m.getFerramentas()) {
+					indice++;
+					if(e.getNome().equals(nome)) {
+						excluir = indice;
+					}
 				}
-			}
-			if(excluir == indice) {
-			m.getFerramentas().remove(excluir);
-			}
+				if(excluir == indice) {
+				m.getFerramentas().remove(excluir);
+				}			
 		}	
 	}
-	
+	/**
+	 * Metodo responsavel por remover material de construcao especifico de alguma filial
+	 * @param nome
+	 */
 	public void removerMateriais(String nome) {
 		int indice = -1;
 		int excluir = 1000;
 		for(Filial m : banco) {
-			indice = -1;
-			excluir = 1000;
-			for(MaterialConstrucao e : m.getMateriais()) {
-				indice++;
-				if(e.getNome().equals(nome)) {
-					excluir = indice;
+				indice = -1;
+				excluir = 1000;
+				for(MaterialConstrucao e : m.getMateriais()) {
+					indice++;
+					if(e.getNome().equals(nome)) {
+						excluir = indice;
+					}
 				}
-			}
-			if(excluir == indice) {
-			m.getMateriais().remove(excluir);
-			}
+				if(excluir == indice) {
+				m.getMateriais().remove(excluir);
+				}		
 		}	
 	}
-	
+	/**
+	 * Metodo responsavel por buscar ferramentas  em alguma filial em especifico 
+	 * @param filial
+	 * @return nome das ferramentas
+	 */
 	public ArrayList<String> buscandoFerramentas (String filial) {
 		ArrayList<String> nome = new ArrayList<String>();
 		for(Filial m : banco) {
@@ -97,7 +115,11 @@ public class Dados{
 		return nome;
 		
     }
-	
+	/**
+	 * Metodo responsavel por buscar material de construcao  em alguma filial em especifico 
+	 * @param nome da filial
+	 * @return nome dos materiais de construcao
+	 */
 	public ArrayList<String> buscandoMatC (String filial) {
 		ArrayList<String> nome = new ArrayList<String>();
 		for(Filial m : banco) {
@@ -114,7 +136,10 @@ public class Dados{
 	
 	private int i = 0;
 	String[] frontName = new String[50];
-	 
+	/**
+	 * Metodo responsavel por buscar o nome das filiais no banco de dados 
+	 * @return nome das filiais salvas
+	 */
 	public String[] filaisN() {
 		
 		
@@ -127,7 +152,11 @@ public class Dados{
 	}
 	
 	
-
+	/**
+	 * Metodo responsavel por excluir filial da classa dados
+	 * @param nome da filial
+	 * @return ince da filial a ser excluida no arraylist da classe daos
+	 */
 	public int excluirFilial(String nome) {
 		   int indice = -1;
 	       for (int i = 0; i < banco.size(); i++) {
@@ -138,7 +167,11 @@ public class Dados{
 	       }
 	       return indice;
 		}
-	
+	/**
+	 * Metodo reponsavel por adicionar ferramenta ao estoque de detrminada filial
+	 * @param objeto ferramenta
+	 * @param filial
+	 */
 	public void adcFerramenta(Ferramentas f, String filial) {
 		
 		for(Filial m : banco) {
@@ -148,6 +181,11 @@ public class Dados{
 		}
 		
 	}
+	/**
+	 * Metodo reponsavel por adicionar material de construcao ao estoque de detrminada filial
+	 * @param nome do material
+	 * @param nome da filial
+	 */
 	public void adcmatC(MaterialConstrucao f, String filial) {
 		
 		for(Filial m : banco) {
@@ -157,7 +195,12 @@ public class Dados{
 		}
 		
 	}
-	
+	/**
+	 * Metodo reponsavel por puxar dados de deteriminado material de construcao
+	 * @param nome do material
+	 * @param nome da filial
+	 * @return dados do material de contrucao
+	 */
 	public MaterialConstrucao dadosMatC(String nome,String filial) {
 		MaterialConstrucao send = null;
 		
@@ -172,7 +215,12 @@ public class Dados{
 		}
 		return send;
 	}
-	
+	/**
+	 * Metodo reponsavel por puxar dados de deteriminada ferramenta
+	 * @param nome da ferramenta
+	 * @param nome da filial
+	 * @return dados da ferramenta
+	 */
 	public Ferramentas dadosFerramenta(String nome,String filial) {
 		Ferramentas send = null;
 		
@@ -188,7 +236,11 @@ public class Dados{
 		return send;
 		
 	}
-	
+	/**
+	 * Metodo que tem como função saber em quais filiais detriminado produto se encontra
+	 * @param nome do produto
+	 * @return nome das filiais em que o produto se encontra
+	 */
 	public ArrayList<String> buscarProduto(String nome) {
 		ArrayList<String> nomeFilial = new ArrayList<>();
 		for(Filial m : banco) {
@@ -205,7 +257,11 @@ public class Dados{
 			}
 			return nomeFilial;	
 	}
-	
+	/**
+	 * Metodo com a unica função de diferenciar um produto entre materital de contrução ou não
+	 * @param nome do produto
+	 * @return 0 para ferramentas e 1 para matC
+	 */
 	public int ferramentaOrMatC(String nome) {	
 		//0 para ferramentas e 1 para matC
 		for(Filial m : banco) {		

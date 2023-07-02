@@ -14,7 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import modelo.Dados;
-
+/**
+ * Classe que representa a tela em que o usuario realiza o CRUD de filiais
+ * @author mtuli
+ *
+ */
 public class GerenciadorFilial {
 	
 	private JFrame tela = new JFrame("Gerenciador de filial");
@@ -31,6 +35,11 @@ public class GerenciadorFilial {
 	String[] useropc = {"Excluir","Atualizar","Estoque","Criar"};
 	String selectedValue1;
 	String opcsDesejada;
+	/**
+	 * Construtor que necessita apenas do banco de dados para iniciar a tela possibilitando o 
+	 * CRUD de filiais
+	 * @param banco de dados
+	 */
 	public GerenciadorFilial(Dados banc){
 		
 		//Pegar Imagem de BackGround
@@ -142,6 +151,12 @@ public class GerenciadorFilial {
 		 
 		
 	}
+	/**
+	 * Metodo utilizado para usar o Jlist de forma que consegue definir se ja tem ou não a quantidade
+	 * de informações necessarias para abrir a proxima tela
+	 * @param opc
+	 * @param filial
+	 */
 	public void selector(String opc, String filial) {
 		
 		if(opc=="Excluir" && filial != null) {	

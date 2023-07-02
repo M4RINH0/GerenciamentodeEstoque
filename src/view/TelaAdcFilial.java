@@ -12,7 +12,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
+/**
+ * Classe que representa a tela em que o usuario ira adicionar uma nova filial 
+ * @author mtuli
+ *
+ */
 public class TelaAdcFilial {
 	private  JLabel label = new JLabel();
 	private  JLabel label2 = new JLabel();
@@ -23,7 +27,11 @@ public class TelaAdcFilial {
 	private  JTextPane area =new JTextPane();
 	private  JButton filial = new JButton("Adicionar Filial");
 	private JButton voltar = new JButton("Voltar");
-	
+	/**
+	 * Construtor necessita apenas do banco de dados para que assim possa adicionar uma filial
+	 * a ele
+	 * @param banco de dados
+	 */
 	public TelaAdcFilial(Dados banco) {
 	
 		//Pegar Imagem de BackGround

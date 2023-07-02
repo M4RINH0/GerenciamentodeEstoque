@@ -19,7 +19,11 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import modelo.Dados;
-
+/**
+ * Classe com a função de representar a tela de mostrar os estoques de detriminada filial
+ * @author mtuli
+ *
+ */
 public class EstoqueF {
 	private JFrame tela = new JFrame("Estoque da Filial");
 	private JList<String> nomes;
@@ -29,7 +33,12 @@ public class EstoqueF {
 	private  JLabel ferramenta = new JLabel();
 	private JLabel label = new JLabel();
 	
-	
+	/**
+	 * Construtor que para mostrar o estoque de detrminada filial necessita de um banco de dados
+	 * e do nome da filial desejada
+	 * @param banco de dados
+	 * @param nome da filial
+	 */
 	public EstoqueF(Dados banc,String filial){
 		
 		//Pegar Imagem de BackGround

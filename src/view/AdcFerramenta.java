@@ -19,7 +19,11 @@ import javax.swing.JTextField;
 
 import modelo.Dados;
 import modelo.Ferramentas;
-
+/**
+ * Classe que representa a tela de adicionar uma ferramenta 
+ * @author mtuli
+ *
+ */
 public class AdcFerramenta {
 	private JFrame tela = new JFrame("Adicionar Ferramenta");
 	private JTextField nome = new JTextField();
@@ -37,7 +41,15 @@ public class AdcFerramenta {
 
 	
 	
-	
+	/**
+	 * Construtor que recebe os dados, uma string com o nome da filial em que o produto sera 
+	 * adicionado ou editado, em caso de edicao de produtos o construtor também recebe o nome do produto
+	 * e um int = 1.
+	 * @param banc
+	 * @param filial
+	 * @param nomeF
+	 * @param opc
+	 */
 	public AdcFerramenta(Dados banc,String filial,String nomeF,int opc) {		
 		//Pegar Imagem de BackGround
 		BufferedImage img = null;
@@ -113,7 +125,7 @@ public class AdcFerramenta {
 		
 		
 		salvar.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String nomeF = nome.getText();

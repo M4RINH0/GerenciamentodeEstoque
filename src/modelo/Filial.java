@@ -2,14 +2,22 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Classe com atributos e metodos de uma filial
+ * @author mtuli
+ *
+ */
 public class Filial {
     private String nome;
     private String gerente;
     private List<MaterialConstrucao> estoque1;
     private List<Ferramentas> estoque2;
     
-
+    /**
+     * construtor que recebe os atributos de uma filial
+     * @param nome
+     * @param gerente
+     */
     public Filial(String nome, String gerente) {
         this.nome = nome;
         this.gerente = gerente;
@@ -32,40 +40,23 @@ public class Filial {
         return estoque2;
     }
     
-    
+   /**
+    * Metodo que adiciona material de contrucao ao estoque da filial 
+    * @param mat
+    */
     public void adicionarMaterialContrucao( MaterialConstrucao mat) {
     	estoque1.add(mat);
     }
-
+    /**
+     * Metodo que adiciona ferramenta ao estoque da filial 
+     * @param ferramenta
+     */
     public void adicionarFerramenta(Ferramentas ferramenta) {
     	estoque2.add(ferramenta);
     }
     
-    public void listarProdutos() {
-    	System.out.println("Materiai de contrucao:");
-		for(MaterialConstrucao m : estoque1) {
-			System.out.println(m.toString());
-		}
-		System.out.println("Ferramentas: ");
-		for(Ferramentas t : estoque2) {
-			System.out.println(t.toString());
-		}
-    }
+   
     
     
-    public void buscarProduto(String cp) {
-    	for(MaterialConstrucao m : estoque1) {
-    		if(m.getCodigoProduto()== cp) {
-    			System.out.println(m.toString());
-    			
-    		}
-    	}
-    	for(Ferramentas m : estoque2) {
-    		if(m.getCodigoProduto()== cp) {
-    			System.out.println(m.toString());
-    		}
-    	}
-    	
-    	
-    }
+    
 }

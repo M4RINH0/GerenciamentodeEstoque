@@ -8,16 +8,24 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+/**
+ * classe que representa a tela de buscar um produto pelo seu nome
+ * @author mtuli
+ *
+ */
 public class BuscarProduto {
-	private JFrame janela = new JFrame("Buscar produto por código");
+	private JFrame janela = new JFrame("Buscar produto por nome");
 	private JLabel busca = new JLabel("Digite o nome do produto que você procura:");
 	private JTextField buscaProduto = new JTextField();
 	private JLabel whatF = new JLabel("Em qual filial deseja buscar o produto?");
 	private JButton buscar = new JButton("Buscar");
 	private JButton voltar = new JButton("Voltar");
 	
-	
+	/**
+	 * o construtor recebe apenas o banco de dados para a partir do  java textfield 
+	 * buscar o produto
+	 * @param banco
+	 */
 	public BuscarProduto(Dados banco) {
 		janela.setSize(600,200);
 		janela.setLayout(null);

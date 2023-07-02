@@ -19,7 +19,11 @@ import javax.swing.JTextField;
 
 import modelo.MaterialConstrucao;
 import modelo.Dados;
-
+/**
+ * Classe que contem a tela de adicionar material de construcao 
+ * @author mtuli
+ *
+ */
 public class AdcMatC {
 	private JFrame tela = new JFrame("Adicionar Matrial de Construcao");
 	private JTextField nome = new JTextField();
@@ -35,7 +39,15 @@ public class AdcMatC {
 	private  JButton salvar = new JButton("Salvar");
 	private JLabel label = new JLabel();
 	
-	
+	/**
+	 * Construtor que recebe os dados, uma string com o nome da filial em que o produto sera 
+	 * adicionado ou editado, em casos de edicao de produtos o construtor também recebe o nome do produto
+	 * e um int = 1.
+	 * @param banc
+	 * @param filial
+	 * @param nomeP
+	 * @param opc
+	 */
 	public AdcMatC(Dados banc,String filial,String nomeP,int opc) {
 		//Pegar Imagem de BackGround
 		BufferedImage img = null;

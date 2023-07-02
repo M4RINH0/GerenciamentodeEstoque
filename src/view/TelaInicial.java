@@ -7,15 +7,23 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Tela inicial em que apresenta ao usuario todas as suas possibilidades inicias de gerencia
+ * @author mtuli
+ *
+ */
 public class TelaInicial {
+	
 
 	private JLabel label = new JLabel("Gerenciador de Estoque");
 	private JFrame janela = new JFrame("Inicio");
 	private JButton gerenciaF = new JButton("Gerenciar Filiais");
 	private JButton listarProdutos = new JButton("Gerenciar Produtos");
 	private JButton buscarProdutos = new JButton("Buscar Produtos");
-	
+	/**
+	 * construtor que para iniciar necessita apenas do banco de dados 
+	 * @param banco
+	 */
 	public TelaInicial(Dados banco){
 
 		

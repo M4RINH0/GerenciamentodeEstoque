@@ -1,8 +1,20 @@
 package modelo;
-
+/**
+ * Classe com atributos de uma ferramenta
+ * @author mtuli
+ *
+ */
 public class Ferramentas extends Produto {
 	private String marca;
 	private int unidadePacote;
+	/**
+	 * construtor que recebe todos os atributos de uma ferramenta
+	 * @param codigoProduto
+	 * @param valor
+	 * @param marca
+	 * @param nome
+	 * @param unidadePacote
+	 */
 
 	public Ferramentas(String codigoProduto, double valor, String marca, String nome, int unidadePacote) {
 		super(codigoProduto, valor, nome);
